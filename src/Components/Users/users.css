@@ -1,0 +1,21 @@
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding:20px;
+}
+
+.app input{
+  height: 7vh;
+  border-radius:20px;
+  width:95%;
+}
+
+.users-list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}

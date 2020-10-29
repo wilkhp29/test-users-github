@@ -51,27 +51,18 @@ export const reduce = (state: init, action: DadosActions): init => {
       const { users } = action.payload;
       return { ...state, users };
     case Types.addingUser:
-      const { user: userNew } = action.payload;
-      const usersAdding = state.users.filter(
-        (userOld) => JSON.stringify(userNew) !== JSON.stringify(userOld)
-      );
-      const usersRemoveinAdding = state.users.filter(
-        (userOld) => JSON.stringify(userNew) !== JSON.stringify(userOld)
-      );
-
-      usersRemoveinAdding.push(userNew);
-      return { users: usersAdding, usersRemove: usersRemoveinAdding };
+      return state;
     case Types.removeUser:
-      const { user: userRemove } = action.payload;
-      const usersAddinginRemove = state.users.filter(
-        (userOld) => JSON.stringify(userNew) !== JSON.stringify(userOld)
-      );
-      const usersRemove = state.users.filter(
-        (userOld) => JSON.stringify(userNew) !== JSON.stringify(userOld)
+      const { user } = action.payload;
+      const usersNew = state.users.filter(
+        (usuario) => JSON.stringify(usuario) !== JSON.stringify(user)
       );
 
-      usersAddinginRemove.push(userRemove);
-      return { users: usersAddinginRemove, usersRemove };
+      const usersRemoved = state.usersRemove.filter(
+        (usuario) => JSON.stringify(usuario) !== JSON.stringify(user)
+      );
+      usersRemoved.push(user);
+      return { ...state, users: usersNew, usersRemove: usersRemoved };
     default:
       return state;
   }

@@ -20,7 +20,7 @@
   overflow: scroll;
 }
 
-small{
+.users-removed small{
   cursor: pointer;
 }
 .closed{

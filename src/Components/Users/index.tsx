@@ -27,7 +27,7 @@ const Users: React.FC = () => {
     <div className="app">
       <input
         type="text"
-        placeholder="Buscar por login ou userID"
+        placeholder="Buscar por login ou userId"
         value={filter}
         onChange={({ target }) => setFilter(target.value)}
       />

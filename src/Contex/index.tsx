@@ -5,20 +5,18 @@ type ContextProp = {
   state: init;
   getUsers: () => void;
   removeUser: (user: user) => void;
-  addingUser: (user: user) => void;
 };
 
 const Context = createContext<ContextProp>({
-  addingUser: () => {},
   getUsers: () => {},
   removeUser: () => {},
   state: startState,
 });
 
 const AppContext: React.FC = ({ children }) => {
-  const { addingUser, getUsers, removeUser, state } = useAppReduce();
+  const { getUsers, removeUser, state } = useAppReduce();
   return (
-    <Context.Provider value={{ addingUser, getUsers, removeUser, state }}>
+    <Context.Provider value={{ getUsers, removeUser, state }}>
       {children}
     </Context.Provider>
   );
@@ -26,9 +24,9 @@ const AppContext: React.FC = ({ children }) => {
 
 export function useAppContext() {
   const context = useContext(Context);
-  const { addingUser, getUsers, removeUser, state } = context;
+  const { getUsers, removeUser, state } = context;
 
-  return { addingUser, getUsers, removeUser, state };
+  return { getUsers, removeUser, state };
 }
 
 export default AppContext;

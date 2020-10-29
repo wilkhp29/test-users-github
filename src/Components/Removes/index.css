@@ -1,3 +1,28 @@
 .users-removed{
   position: fixed;
+  display: flex;
+  right: 10px;
+  bottom: 10px;
+  background:#2980b9;
+  color:#fff;
+  padding:10px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  flex-direction: column;
+}
+
+.removed-users{
+  max-height: 70vh;
+  background:#fff;
+  width: 90%;
+  padding:10px;
+  overflow: scroll;
+}
+
+small{
+  cursor: pointer;
+}
+.closed{
+  display: none;
 }

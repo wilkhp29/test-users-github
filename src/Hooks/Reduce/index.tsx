@@ -1,4 +1,3 @@
-import { type } from "os";
 import { useCallback, useReducer } from "react";
 import git from "../../Services/axios";
 
@@ -35,7 +34,6 @@ type ActionMap<M extends { [index: string]: any }> = {
 export type DadosActions = ActionMap<payloadData>[keyof ActionMap<payloadData>];
 
 type payloadData = {
-  [Types.addingUser]: { user: user };
   [Types.getUsers]: { users: Array<user> };
   [Types.removeUser]: { user: user };
 };
@@ -50,8 +48,6 @@ export const reduce = (state: init, action: DadosActions): init => {
     case Types.getUsers:
       const { users } = action.payload;
       return { ...state, users };
-    case Types.addingUser:
-      return state;
     case Types.removeUser:
       const { user } = action.payload;
       const usersNew = state.users.filter(
@@ -72,17 +68,15 @@ export const useAppReduce = () => {
   const [state, dispath] = useReducer(reduce, startState);
 
   const getUsers = useCallback(async () => {
-    const { data } = await git.get("users");
-    dispath({ type: Types.getUsers, payload: { users: data } });
-  }, []);
-
-  const addingUser = useCallback((user: user) => {
-    dispath({ type: Types.addingUser, payload: { user } });
-  }, []);
+    if (state.users.length === 0 && state.usersRemove.length === 0) {
+      const { data } = await git.get("users");
+      dispath({ type: Types.getUsers, payload: { users: data } });
+    }
+  }, [state]);
 
   const removeUser = useCallback((user: user) => {
     dispath({ type: Types.removeUser, payload: { user } });
   }, []);
 
-  return { state, getUsers, removeUser, addingUser };
+  return { state, getUsers, removeUser };
 };
